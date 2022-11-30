@@ -66,26 +66,28 @@
     }
     
 
+    //les exemplaire sans l'attribut etat sont considerer comme neuf
+
     function find_all_exemplaire():array{
-        $exemplaires=[["id"=>1,"date_enregistrement"=>"01/01/2020","etat"=>"neuf","ouvrage_id"=>1],
-                    ["id"=>2,"date_enregistrement"=>"01/01/2020","etat"=>"neuf","ouvrage_id"=>1],
-                    ["id"=>3,"date_enregistrement"=>"20/05/2017","etat"=>"deteriore","ouvrage_id"=>1], // les tables avec l'attribut etat sont deterioirer ou perdu
-                    ["id"=>4,"date_enregistrement"=>"12/08/2020","etat"=>"neuf","ouvrage_id"=>2],
-                    ["id"=>5,"date_enregistrement"=>"12/08/2020","etat"=>"neuf","ouvrage_id"=>2],
-                    ["id"=>6,"date_enregistrement"=>"12/12/2017","etat"=>"neuf","ouvrage_id"=>3],
-                    ["id"=>7,"date_enregistrement"=>"25/08/2016","etat"=>"neuf","ouvrage_id"=>4],
-                    ["id"=>8,"date_enregistrement"=>"12/08/2014","etat"=>"deteriore","ouvrage_id"=>4],
-                    ["id"=>9,"date_enregistrement"=>"18/08/2014","etat"=>"neuf","ouvrage_id"=>5],
-                    ["id"=>10,"date_enregistrement"=>"21/08/2017","etat"=>"neuf","ouvrage_id"=>6],
-                    ["id"=>11,"date_enregistrement"=>"18/08/2017","etat"=>"deteriore","ouvrage_id"=>6 ],
-                    ["id"=>12,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>7],
-                    ["id"=>13,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>7],
-                    ["id"=>14,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>7],
-                    ["id"=>15,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>8],
-                    ["id"=>16,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>8],
-                    ["id"=>17,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>9],
-                    ["id"=>18,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>9],
-                    ["id"=>19,"date_enregistrement"=>"17/08/2014","etat"=>"neuf","ouvrage_id"=>10],
+        $exemplaires=[["id"=>1,"date_enregistrement"=>"01/01/2020","ouvrage_id"=>1],
+                    ["id"=>2,"date_enregistrement"=>"01/01/2020","ouvrage_id"=>1],
+                    ["id"=>3,"date_enregistrement"=>"20/05/2017","ouvrage_id"=>1], // les tables avec l'attribut etat sont deterioirer ou perdu
+                    ["id"=>4,"date_enregistrement"=>"12/08/2020","ouvrage_id"=>2],
+                    ["id"=>5,"date_enregistrement"=>"12/08/2020","ouvrage_id"=>2],
+                    ["id"=>6,"date_enregistrement"=>"12/12/2017","ouvrage_id"=>3],
+                    ["id"=>7,"date_enregistrement"=>"25/08/2016","ouvrage_id"=>4],
+                    ["id"=>8,"date_enregistrement"=>"12/08/2014","ouvrage_id"=>4],
+                    ["id"=>9,"date_enregistrement"=>"18/08/2014","ouvrage_id"=>5],
+                    ["id"=>10,"date_enregistrement"=>"21/08/2017","ouvrage_id"=>6],
+                    ["id"=>11,"date_enregistrement"=>"18/08/2017","etat"=>"perdu","ouvrage_id"=>6 ],
+                    ["id"=>12,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>7],
+                    ["id"=>13,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>7],
+                    ["id"=>14,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>7],
+                    ["id"=>15,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>8],
+                    ["id"=>16,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>8],
+                    ["id"=>17,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>9],
+                    ["id"=>18,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>9],
+                    ["id"=>19,"date_enregistrement"=>"17/08/2014","ouvrage_id"=>10],
                     ["id"=>20,"date_enregistrement"=>"17/08/2014","etat"=>"deteriore","ouvrage_id"=>10],
         ];
         return $exemplaires;
@@ -103,23 +105,22 @@
 
         return $adherent; 
     }
-    
-    
 
     //une demande de pret sans statut est en attente
     function find_all_demande_de_pret():array{
             $demande_de_pret=[["id"=>1,"adherent_id"=>1,"exemplaire_id"=>1,"statut"=>"accepter"],//accepter mais pas encore passer a la bibliotheque
-                              ["id"=>2,"adherent_id"=>5,"exemplaire_id"=>5,"statut"=>"accepter","date_pret"=>"25/11/2022"],//accepter et passer a la bibliotheque
+                              ["id"=>2,"adherent_id"=>5,"exemplaire_id"=>5,"statut"=>"accepter","date_emprunt"=>"25/11/2022"],//accepter et passer a la bibliotheque
                               ["id"=>3,"adherent_id"=>3,"exemplaire_id"=>4],//en attente
                               ["id"=>4,"adherent_id"=>4,"exemplaire_id"=>3,"statut"=>"rejeter"],//rejeter
-                              ["id"=>5,"adherent_id"=>2,"exemplaire_id"=>5,"statut"=>"accepter","date_pret"=>"20/11/2022"],//accepter et passer en bibliotheque
-                              ["id"=>6,"adherent_id"=>6,"exemplaire_id"=>8,"statut"=>"accepter","date_pret"=>"20/11/2022","date_r_reel"=>"4/12/2022"],//accepter et passer en bibliotheque et retourner
+                              ["id"=>5,"adherent_id"=>2,"exemplaire_id"=>5,"statut"=>"accepter","date_emprunt"=>"20/11/2022"],//accepter et passer en bibliotheque
+                              ["id"=>6,"adherent_id"=>6,"exemplaire_id"=>8,"statut"=>"accepter","date_emprunt"=>"20/11/2022"],//accepter et passer en bibliotheque 
                             ];      
 
             return $demande_de_pret;
     }
-    //une demande de prêt termine son execution et  passe la tâche a la table de prêt si elle a un statut:accepeter et a une date_de_pret;
-    //c'est a dire que si l'on veut plus d'informations sur l'etat du prêt ( "en cours ou retourner ") on passe par la table prêt;
+    //une demande de prêt termine son execution et devient  un emprunt si elle a un statut:accepeter et a une date_d'emprunt;
+    //A defaut de ne pas creer une  table emprunt qui ne contient que des redondances de la table demande
+    //c'est a dire que si l'on veut plus d'informations sur l'etat de  l'emprunt ( "en cours ou retourner ") on cherche une demande de prêt avec un attribut statut="acceper" and l'existence de l'attribut date_emprunt;
 
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
@@ -138,17 +139,26 @@
     //     return $prets;
     // }
 
-    
-    //pret en cours = pret accepeter avec une date_pret,
-    //pret retourner= pret en cours avec une date_r_reel,
+    //emprunt en cours = emprunt accepter avec une date_pret,
+    //emprunt retourner= emprunt en cours avec une date_r_reel,
 
-    function find_all_pret():array{
-            $prets=[["id"=>1,"date_pret"=>"25/11/2022","date_r_prevue"=>"9/12/2022","date_r_reel"=>"","adherent_id"=>5],
-                    ["id"=>2,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","date_r_reel"=>"","adherent_id"=>2],
+    function find_all_emprunt():array{
+            $emprunts=[["id"=>1,"date_pret"=>"25/11/2022","date_r_prevue"=>"9/12/2022","adherent_id"=>5],
+                    ["id"=>2,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","adherent_id"=>2],
                     ["id"=>3,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","date_r_reel"=>"4/12/2022","adherent_id"=>6]
 
             ];
-            return $prets;
+            return $emprunts;
     }
+    // //un exemplaire est actuellement en état de prêt que si la table emprunt associé a cette exemplaire na pas de date_r_reel
+    // function pret():array{
+    //     $pret=[["id"=>1,"emprunt_id"=>1,"exemplaire_id"=>],
+    //            ["id"=>1,"emprunt_id"=>,"exemplaire_id"=>],
+
+    //     ]
+
+    // }
+
+
     // archiver une fonction consiste à la supprimer de la table exemplaire et de l'ajouter dans la table archiver
 ?>
