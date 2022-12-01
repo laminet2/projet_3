@@ -13,16 +13,16 @@
     //un ouvrage est disponible s' il a au moins un exemplaire qui n'est pas en prêt ou détérioré
 
     function find_all_ouvrages():array{
-        $ouvrages=[["id"=>1,"titre"=>"statistique et probabilité","date_edition"=>"mars 1997","mot_cle"=>["statistique","probabilite","khie-deux","student","loie"],"rayon_id"=>5],
+        $ouvrages=[["id"=>1,"image_id"=>9782100033355290,"titre"=>"statistique et probabilité","date_edition"=>"mars 1997","mot_cle"=>["statistique","probabilite","khie-deux","student","loie"],"rayon_id"=>5],
                   ["id"=>2,"titre"=>"Maths pratiques terminale D","date_edition"=>"2019","mot_cle"=>["maths","terminale","denombrement","geometrie"],"rayon_id"=>5],
-                  ["id"=>3,"titre"=>"le jeûne de ramadan ethique & preceptes ","date_edition"=>"fevrier 2017","mot_cle"=>["jeune","ramadan","ethique","preceptes"],"rayon_id"=>4],
+                  ["id"=>3,"image_id"=>95555555555555555555558452,"titre"=>"le jeûne de ramadan ethique & preceptes ","date_edition"=>"fevrier 2017","mot_cle"=>["jeune","ramadan","ethique","preceptes"],"rayon_id"=>4],
                   ["id"=>4,"titre"=>"Introduction au marketing","date_edition"=>"Octobre 2001","mot_cle"=>["marketing","introduction","initiation"],"rayon_id"=>2],
                   ["id"=>5,"titre"=>"Methode de communication ecrite et orale","date_edition"=>"2008","mot_cle"=>["ecrite","communication","orale"],"rayon_id"=>1],
-                  ["id"=>6,"titre"=>"l'art subtile de s'en foutre","date_edition"=>"2016","mot_cle"=>["art","subtile","foutre"],"rayon_id"=>3] ,
-                  ["id"=>7,"titre"=>"Comment se faire des amis","date_edition"=>"1981","mot_cle"=>["amis","influence","communication"],"rayon_id"=>3]   ,
+                  ["id"=>6,"image_id"=>4116955252236556669,"titre"=>"l'art subtile de s'en foutre","date_edition"=>"2016","mot_cle"=>["art","subtile","foutre"],"rayon_id"=>3] ,
+                  ["id"=>7,"image_id"=>85245523522352,"titre"=>"Comment se faire des amis","date_edition"=>"1981","mot_cle"=>["amis","influence","communication"],"rayon_id"=>3]   ,
                   ["id"=>8,"titre"=>"l'alchimiste","date_edition"=>"1994","mot_cle"=>["Alchimiste","passion"],"rayon_id"=>6],
-                  ["id"=>9,"titre"=>"les mains sales","date_edition"=>"1948","mot_cle"=>["mains","sales","Sarte","pragmatique","theatres"],"rayon_id"=>6],
-                  ["id"=>10,"titre"=>"l'enfant noir","date_edition"=>"1953","mot_cle"=>["enfant","noir","autobiographie"],"rayon_id"=>6]   
+                  ["id"=>9,"image_id"=>42545454654787,"titre"=>"les mains sales","date_edition"=>"1948","mot_cle"=>["mains","sales","Sarte","pragmatique","theatres"],"rayon_id"=>6],
+                  ["id"=>10,"image_id"=>52552512587,"titre"=>"l'enfant noir","date_edition"=>"1953","mot_cle"=>["enfant","noir","autobiographie"],"rayon_id"=>6]   
                  ];
         return $ouvrages;
     }
@@ -106,21 +106,28 @@
         return $adherent; 
     }
 
-    //une demande de pret sans statut est en attente
+    //une demande de pret sans clé statut est en attente
+    //une demande de prêt avec une clé date_emprunt est un emprunt
+
+    //emprunt en cours = emprunt accepter avec une date_pret,
+    //emprunt retourner= emprunt en cours avec une date_r_reel,
+    
     function find_all_demande_de_pret():array{
             $demande_de_pret=[["id"=>1,"adherent_id"=>1,"exemplaire_id"=>1,"statut"=>"accepter"],//accepter mais pas encore passer a la bibliotheque
-                              ["id"=>2,"adherent_id"=>5,"exemplaire_id"=>5,"statut"=>"accepter","date_emprunt"=>"25/11/2022"],//accepter et passer a la bibliotheque
+                              ["id"=>2,"adherent_id"=>5,"exemplaire_id"=>5,"statut"=>"accepter","date_emprunt"=>"25/11/2022","date_r_prevue"=>"9/12/2022",],//accepter et passer a la bibliotheque
                               ["id"=>3,"adherent_id"=>3,"exemplaire_id"=>4],//en attente
                               ["id"=>4,"adherent_id"=>4,"exemplaire_id"=>3,"statut"=>"rejeter"],//rejeter
-                              ["id"=>5,"adherent_id"=>2,"exemplaire_id"=>5,"statut"=>"accepter","date_emprunt"=>"20/11/2022"],//accepter et passer en bibliotheque
-                              ["id"=>6,"adherent_id"=>6,"exemplaire_id"=>8,"statut"=>"accepter","date_emprunt"=>"20/11/2022"],//accepter et passer en bibliotheque 
+                              ["id"=>5,"adherent_id"=>2,"exemplaire_id"=>5,"statut"=>"accepter","date_emprunt"=>"20/11/2022","date_r_prevue"=>"4/12/2022"],//accepter et passer en bibliotheque
+                              ["id"=>6,"adherent_id"=>6,"exemplaire_id"=>8,"statut"=>"accepter","date_emprunt"=>"20/11/2022","date_r_prevue"=>"4/12/2022","date_r_reel"=>"4/12/2022"],//livre retoruner 
                             ];      
 
             return $demande_de_pret;
     }
-    //une demande de prêt termine son execution et devient  un emprunt si elle a un statut:accepeter et a une date_d'emprunt;
-    //A defaut de ne pas creer une  table emprunt qui ne contient que des redondances de la table demande
+    //A defaut de ne pas creer une  table emprunt qui ne contient que des redondances de la table demande_de_prêt, on utilisera la table demande_de_prêt qui passe au statut emprunt sous certaines condition
+    //une demande de prêt termine son execution et devient  un emprunt si elle a un clé,valeur: statut,accepeter et a une clé date_d'emprunt;
     //c'est a dire que si l'on veut plus d'informations sur l'etat de  l'emprunt ( "en cours ou retourner ") on cherche une demande de prêt avec un attribut statut="acceper" and l'existence de l'attribut date_emprunt;
+    ///un exemplaire est actuellement en état de prêt que si la table emprunt associé a cette exemplaire n'a pas de  clé date_r_reel
+
 
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
@@ -138,19 +145,14 @@
     //     }
     //     return $prets;
     // }
+    // function find_all_emprunt():array{
+    //       $emprunts=[["id"=>1,"date_pret"=>"25/11/2022","date_r_prevue"=>"9/12/2022","adherent_id"=>5],
+     //               ["id"=>2,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","adherent_id"=>2],
+    //              ["id"=>3,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","date_r_reel"=>"4/12/2022","adherent_id"=>6]
 
-    //emprunt en cours = emprunt accepter avec une date_pret,
-    //emprunt retourner= emprunt en cours avec une date_r_reel,
-
-    function find_all_emprunt():array{
-            $emprunts=[["id"=>1,"date_pret"=>"25/11/2022","date_r_prevue"=>"9/12/2022","adherent_id"=>5],
-                    ["id"=>2,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","adherent_id"=>2],
-                    ["id"=>3,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","date_r_reel"=>"4/12/2022","adherent_id"=>6]
-
-            ];
-            return $emprunts;
-    }
-    // //un exemplaire est actuellement en état de prêt que si la table emprunt associé a cette exemplaire na pas de date_r_reel
+    //         ];
+    //         return $emprunts;
+    // }
     // function pret():array{
     //     $pret=[["id"=>1,"emprunt_id"=>1,"exemplaire_id"=>],
     //            ["id"=>1,"emprunt_id"=>,"exemplaire_id"=>],
