@@ -71,6 +71,7 @@
         supprimer("exemplaire",$id);
 
     }
+    
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
     //     $prets=[];
