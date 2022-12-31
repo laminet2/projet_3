@@ -63,13 +63,113 @@
    // function filter(string $names,$filtre)
 
     function archiver_exemplaire(int $id,$filename=FILENAME):void{
-        
+         /*usecase*/
         $tuple=find_table_by_id("exemplaire",$id);
         $data=file_get_contents($filename);
         $data=json_decode($data,true);
         add("archive",$tuple);
         supprimer("exemplaire",$id);
 
+    }
+    function find_user_by_login_and_password($login,$password,$filename=FILENAME):array|null{
+        $data=file_get_contents($filename);
+        $data=json_decode($data,true);
+        foreach($data["users"] as $user){
+            if($user["login"]==$login && $user["password"]==$password){
+                return $user;
+            }
+        }
+        return null;
+    }
+    function find_all_emprunt():array{
+        /*usecase*/
+        $demandes=find_all("demande_de_pret");
+        $emprunts=[];
+        foreach($demandes as $demande){
+            if(  isset($demande["date_r_prevue"]) && !isset($demande["date_r_reel"])  ){
+                $emprunts[]=$demande;
+            }
+        }
+        return $emprunts;
+    }
+    function find_all_exemplaire_perdu_or_deteriorer():array{
+        $exemplaires=find_all("exemplaires");
+        $exemplaireDeteriorer=[];
+        foreach ($exemplaire as $exemplaire) {
+            if(isset($exemplaire["etat"])){
+                $exemplaireDeteriorer[]=$exemplaire;
+            }
+        }
+        return $exemplaireDeteriorer;
+    }
+
+    function find_all_exemplaire_by_ouvrage($id):array{
+
+        $exemplaires=find_all("exemplaires");
+        $ouvrageExemplaires=[];
+        foreach ($exemplaires as $exemplaire){
+            if($exemplaire["ouvrage_id"]==$id){
+                $ouvrageExemplaires[]=$exemplaire;
+            }
+        }
+        return $ouvrageExemplaires;
+    }
+
+    function verifier_exemplaire_in_emprunt($id):bool{
+        $emprunts=find_all_emprunt();
+        $exemplaires=find_all("exemplaires");
+        foreach($exemplaires as $exemplaire){
+            if($exemplaire["id"]==$id){
+                return True;
+            }
+        }
+        return False;
+
+
+    }
+    function verifier_exemplaire_deteriore_ou_perdu(int $id):bool{
+        $exmplaireD=find_all_exemplaire_perdu_or_deteriorer();
+        foreach ($exemplaireD as $eD) {
+            if($ed["id"]==$id){
+                return True;
+            }
+        }
+        return False;
+    }
+    function verifier_exemplaire_dispo_by_id(int $id):bool{
+        if(!verifier_exemplaire_in_emprunt($id) && !verifier_exemplaire_deteriore_ou_perdu($id)){
+            return True;
+        }
+        return False;
+    }
+
+    function verifier_ouvrage_dispo_by_id(int $id):bool{
+        //objectif : -verifier si au moins un exemplaire de l'ouvrage concerné 
+        //n'est pas dans la table emprunts (un emprunt est une demande de pret avec une date de retour prévu & sans date de retour_reel);
+        // - verifier si ils sont deterioré ou perdu
+        $OuvrageExemplaires=find_all_exemplaire_by_ouvrage($id);
+        //$emprunts=find_all_emprunt();
+        
+        //verifier si l'exemplaire est dispo 
+        //$exemplaire_indispo=find_all_exemplaire_perdu_or_deteriorer();
+        foreach ($OuvrageExemplaires as $O_E) {
+            if(verifier_exemplaire_dispo_by_id($O_E["id"])){
+                return True;
+            }
+        }
+        return False;
+    }
+    
+    function find_all_catalogue_dispo($filename=FILENAME){
+        /*usecase*/
+        $ouvrages=find_all("ouvrages");
+        $ouvrageDispo=array();
+        foreach ($ouvrages as $ouvrage) {
+            if(verifier_ouvrage_dispo_by_id($ouvrage["id"])){
+                    $ouvrageDispo[]=$ouvrage;
+            }
+        }
+        return $ouvrageDispo;
     }
     
     // function pret_accepter():array{

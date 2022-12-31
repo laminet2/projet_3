@@ -1,0 +1,40 @@
+main  {
+    /* */
+}
+
+main .proverbe{
+    width: 70%;
+    margin: 2rem auto;
+    text-align: center;
+    color: white;
+}
+main .proverbe h1{
+    font-size: xx-large;
+}
+main .proverbe h6{
+    margin-top: 1rem;
+    text-decoration: underline;
+}
+main  section:nth-child(2){
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin: 4rem auto 0 auto; 
+}
+main  section:nth-child(2) button{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-size: small;
+    font-family: var(--second-typographie);
+    color:  var(--primary-color);
+    background-color: white;
+    box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: solid 0px black;
+}
+main  section:nth-child(2) button.actif,main  section:nth-child(2) button:hover{
+    color:  white;
+    background-color: var(--primary-color);
+}

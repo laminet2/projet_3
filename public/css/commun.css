@@ -1,10 +1,52 @@
+:root{
+    --primary-color:#311005;
+    --text-typographie:'PT Serif', serif;
+    --second-typographie:'lato', serif;
+    --blue:rgba(10, 184, 195, 1);
+}
 *{
     margin:0;
     padding:0;
+    font-family: var(--text-typographie);
+
+}
+a{
+    text-decoration: none;
+    color:white;
+    font-size: .8rem;
+    font-family: var(--text-typographie);
+    font-weight: bold;
+}
+body>header.principal{
+    position:absolute;
+    width: 100%;
+    z-index: -5;
+}
+main{
+    z-index:1;
+    margin-top: 25vh;
+    position: absolute;
+    width: 100%;
+
+}
+header.principal>section{
+    display: flex;
+    height: 10vh;
+    width: 90%;
+    margin: 1.5rem auto;
+    justify-content: space-between;
+}
+header.principal .invisible{
+    visibility: hidden;
+}
+header.principal .user,header.principal .invisible{
+    width: 15%;
+    display: flex;
+    align-items: center;
+}
+header.principal .user:hover{
+    background-color: rgba(255, 255, 255, 0.31);
+    border-radius: 5px;
 }
 
-:root{
-    --primary-color:#311005;
-    --text-typographie:Myanmar Khyay;
-}
 /* button acceuil*/

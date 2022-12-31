@@ -1,8 +1,8 @@
-<main>
-        <h1>    
+<main class="acceuil">
+        <h1 class="title">    
             BIBLIOTHEQUE DE L’ECOLE 221
         </h1>
-        <div class="button">
+        <div class="button ">
             <button>
                     <a href="index.php?view=catalogue_dispo">CONSULTER LE CATALOGUE</a>
             </button>

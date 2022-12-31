@@ -1,6 +1,130 @@
+
 body{
-    background-image: url("https://images.unsplash.com/photo-1568667256549-094345857637?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80/image/acceuil.jpg");
-    background-size: cover;
-    background: fixed;
-    height:100vh;
+    background: url("https://cdn-images-1.medium.com/max/2000/0*AKOcNmLt81m4uI8i"),rgba(255, 255, 255, 0.1); 
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    height: 80vh;
+}
+main{
+    padding:0 ;
+}
+main.acceuil{
+    width: 85%;
+    margin: 4rem auto 0 auto;
+}
+main.connexion{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+main.connexion,main.creer_compte{
+    height: 70vh;
+
+}
+.title{
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+    font-size: 2.8rem;
+    
+    font-family: Lato;
+    letter-spacing: 0.6rem;
+}
+.button{
+    height: 24vh;
+    margin: 5rem auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.button>button {
+    border-radius: 45px;
+    width: 11rem;
+    height: 3em;
+    background-color: rgba(13, 13, 13, 0.676);
+    border-color:white;
+
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.side-bar-left{
+    flex: 2;
+    backdrop-filter: blur(20px);
+    border-radius: 18px;
+    height: 100vh;
+}
+.connexion .side-bar-left>form{
+    width: 80%;
+    margin:auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 70vh;
+}
+.side-bar-left>form>div{
+    width: 80%;
+
+}
+.sous-titre{
+    font-size: 1.5rem;
+    margin: 1rem;
+    margin-bottom: 1rem;
+}
+.side-bar-right{
+    flex:4;
+    padding-top: 10rem;
+}
+input{
+    width: 80%;
+    background: rgba(255, 255, 255, 0.54);
+    border-radius:45px;
+    border:solid 0px ;
+    padding:0.5rem;
+    text-align: center;
+
+}
+.submit>button{
+    width: 45%;
+    margin-left: 2.7rem;
+    padding: 0.5rem;
+    border-radius: 45px;
+    border: 1px solid transparent;
+}
+div.submit>button:hover {
+    background-color:white;
+}
+main.creer_compte{
+    padding: 0;
+}
+main.creer_compte .side-bar-left{
+    height: 89vh;
+    width: 60%;
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+main.creer_compte .side-bar-left form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    height: 100%;
+}
+
+main.creer_compte input, main.creer_compte button{
+    width: 50%;
+    margin-left: 3rem;
 }
