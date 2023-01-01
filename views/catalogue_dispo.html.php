@@ -16,5 +16,30 @@
                     PRÊT
                 </button>
         </section>
-
+        <section class="search"></section>
+        <section class="catalogue">
+            <table >
+                <thead>
+                    <tr >
+                        <th class="cover">COVER</th>
+                        <th class="titre">TITRE</th>
+                        <th class="auteurs">AUTEURS</th>
+                        <th class="date_dedition">DATE D'EDITION</th>
+                        <th class="rayon">RAYON</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <?php foreach($catalogues as $catalogue):?>
+                            <tr>
+                                <td class="cover"><img src=<?= $catalogue["cover"]?> alt="cover"></td>
+                                <td class="titre"><?= $catalogue["titre"] ?></td>
+                                <td class="auteurs"><?= implode(" ",$catalogue["auteurs"])  ?></td>
+                                <td class="date_dedition"><?= $catalogue["date_edition"] ?></td>
+                                <td class="rayon"><?= $catalogue["rayon"] ?></td>
+                            </tr>
+                            
+                        <?php endforeach ?>
+                </tbody>
+            </table>
+        </section>
 </main>

@@ -1,4 +1,3 @@
-
 body{
     background: url("https://cdn-images-1.medium.com/max/2000/0*AKOcNmLt81m4uI8i"),rgba(255, 255, 255, 0.1); 
     background-size: 100vw 100vh;
@@ -10,8 +9,9 @@ main{
     padding:0 ;
 }
 main.acceuil{
+    position: fixed;
     width: 85%;
-    margin: 4rem auto 0 auto;
+    margin-left: 4rem;
 }
 main.connexion{
     display: flex;
@@ -20,6 +20,7 @@ main.connexion{
 }
 main.connexion,main.creer_compte{
     height: 70vh;
+    margin-top: 0;
 
 }
 .title{
@@ -109,7 +110,6 @@ main.creer_compte .side-bar-left{
     width: 60%;
     padding: 0;
     margin: 0 auto;
-    margin-top: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,6 +122,8 @@ main.creer_compte .side-bar-left form{
     justify-content: space-between;
     width: 60%;
     height: 100%;
+    margin-top: 2rem;
+
 }
 
 main.creer_compte input, main.creer_compte button{

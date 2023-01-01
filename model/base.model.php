@@ -35,7 +35,7 @@
         file_put_contents($filename,$data);
     }   
     
-    function find_table_by_id(string $names,int $id,int $option=0,string $filename=FILENAME):array|int|null{
+    function find_tuple_by_id(string $names,int $id,int $option=0,string $filename=FILENAME):array|int|null{
        //l'option 0 consiste a retourner le tuples;
         //l'option 1 consite a retourner la clé;
 
@@ -50,11 +50,12 @@
         }
         return null;
     }
+    
 
     function supprimer(string $names,int $id,$filename=FILENAME):void{
         $data=file_get_contents($filename);
         $data=json_decode($data,true);
-        $key=find_table_by_id($names,$id,1);
+        $key=find_tuple_by_id($names,$id,1);
         unset($data[$names][$key]);
         $data=json_encode($data,JSON_PRETTY_PRINT);
         file_put_contents($filename,$data);
@@ -64,7 +65,7 @@
 
     function archiver_exemplaire(int $id,$filename=FILENAME):void{
          /*usecase*/
-        $tuple=find_table_by_id("exemplaire",$id);
+        $tuple=find_tuple_by_id("exemplaire",$id);
         $data=file_get_contents($filename);
         $data=json_decode($data,true);
         add("archive",$tuple);
@@ -81,6 +82,9 @@
         }
         return null;
     }
+
+    /*          PARTIE CATALOGUE_DISPO               */
+
     function find_all_emprunt():array{
         /*usecase*/
         $demandes=find_all("demande_de_pret");
@@ -95,7 +99,7 @@
     function find_all_exemplaire_perdu_or_deteriorer():array{
         $exemplaires=find_all("exemplaires");
         $exemplaireDeteriorer=[];
-        foreach ($exemplaire as $exemplaire) {
+        foreach ($exemplaires as $exemplaire) {
             if(isset($exemplaire["etat"])){
                 $exemplaireDeteriorer[]=$exemplaire;
             }
@@ -117,20 +121,17 @@
 
     function verifier_exemplaire_in_emprunt($id):bool{
         $emprunts=find_all_emprunt();
-        $exemplaires=find_all("exemplaires");
-        foreach($exemplaires as $exemplaire){
-            if($exemplaire["id"]==$id){
+        foreach($emprunts as $emprunt){
+            if($emprunt["id"]==$id){
                 return True;
             }
         }
         return False;
-
-
     }
     function verifier_exemplaire_deteriore_ou_perdu(int $id):bool{
-        $exmplaireD=find_all_exemplaire_perdu_or_deteriorer();
+        $exemplaireD=find_all_exemplaire_perdu_or_deteriorer();
         foreach ($exemplaireD as $eD) {
-            if($ed["id"]==$id){
+            if($eD["id"]==$id){
                 return True;
             }
         }
@@ -169,7 +170,47 @@
                     $ouvrageDispo[]=$ouvrage;
             }
         }
+        if($ouvrageDispo!=null){
+            find_all_auteurs_ouvrages($ouvrageDispo);
+            find_rayons_ouvrages($ouvrageDispo);
+            find_source_cover($ouvrageDispo);
+        }
         return $ouvrageDispo;
+    }
+    function find_source_cover(array &$ouvrages):void{
+        foreach ($ouvrages as $key=>$ouvrage) {
+            if(isset($ouvrage["image_id"])){
+                $src=$ouvrage["image_id"];
+            }else{
+                $src="cover default";
+            }
+            $ouvrages[$key]["cover"]="public/image/cover"."/"."$src";
+        }
+    }
+    function auteurs_by_ouvrage(int $id):array{
+        $ecries=find_all("ecries");
+        $auteurs=[];
+        foreach($ecries as $ecrie){
+            if($ecrie["ouvrage_id"]==$id){
+                $auteur=find_tuple_by_id("auteurs",$ecrie["auteur_id"]);
+                $auteurs[]=$auteur["nom"]." ".$auteur["prenom"];
+            }
+        }
+        return $auteurs;
+    }
+
+    function find_all_auteurs_ouvrages(array &$ouvrages):void{
+        foreach ($ouvrages as $key=>$ouvrage) {
+            $auteurs=auteurs_by_ouvrage($ouvrage["id"]);
+            $ouvrages[$key]["auteurs"]=$auteurs;
+        }
+    }
+
+    function find_rayons_ouvrages(array &$ouvrages):void{
+        foreach($ouvrages as $key=>$ouvrage){
+            $rayon=find_tuple_by_id("rayons",$ouvrage["rayon_id"]);
+            $ouvrages[$key]["rayon"]=$rayon["nom"];
+        }
     }
     
     // function pret_accepter():array{

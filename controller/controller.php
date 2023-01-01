@@ -19,7 +19,7 @@
                     }
                     else{
                         
-                        $data=find_all_catalogue_dispo();
+                        $data["catalogues"]=find_all_catalogue_dispo();
 	
                     }
                     render_view('catalogue_dispo',$data,"adherent");
@@ -61,15 +61,14 @@
             render_view("acceuil");
         }
     
-
-
+    
     if(isset($_POST["btnsave"])){
         extract($_POST);
         switch ($btnsave) {
             case 'connexion':
                    $user=find_user_by_login_and_password($_POST["login"],$_POST["password"]);
                    if($user==null){
-                        render_view("connexion");
+                        header("location:index.php?view=connexion");
                     }
                     else{
                             $_SESSION["user"]=$user;
@@ -107,7 +106,7 @@
                 if($view!="connexion" && $view!="acceuil" && $view!="creer_compte"){
                     if($view!="catalogue_dispo"){
                         $view=$_SESSION["user"]["role"]."/".$view;
-                        
+
                     }
                     require_once("views/layout/header.html.php");
                 }
