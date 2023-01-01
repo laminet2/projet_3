@@ -16,11 +16,34 @@
                     PRÊT
                 </button>
         </section>
-        <section class="search"></section>
+        <section class="search">
+                <p>
+                    RECHERCHE AVANCE
+                </p>
+            <form action="index.php" method="post">
+                
+                <div>
+                     <input type="text" name="value" placeholder="TROUVER UN OUVRAGE ...">
+                </div>
+                <div>
+                    <select name="filtre" id="">
+                        <option value="" disabled selected>RECHERCHER PAR</option>
+                        <option value="titre">TITRE</option>
+                        <option value="rayon">RAYON</option>
+                        <option value="auteurs">AUTEUR</option>
+                        <option value="mot_cle">MOT CLE</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" name="btnsave" value=filter_catalogue_dispo><i class="fas fa-search fa-2x"></i></button>
+                </div>
+
+            </form>
+        </section>
         <section class="catalogue">
             <table >
                 <thead>
-                    <tr >
+                    <tr>
                         <th class="cover">COVER</th>
                         <th class="titre">TITRE</th>
                         <th class="auteurs">AUTEURS</th>
@@ -29,15 +52,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <?php foreach($catalogues as $catalogue):?>
-                            <tr>
-                                <td class="cover"><img src=<?= $catalogue["cover"]?> alt="cover"></td>
-                                <td class="titre"><?= $catalogue["titre"] ?></td>
-                                <td class="auteurs"><?= implode(" ",$catalogue["auteurs"])  ?></td>
-                                <td class="date_dedition"><?= $catalogue["date_edition"] ?></td>
-                                <td class="rayon"><?= $catalogue["rayon"] ?></td>
-                            </tr>
+                        <?php foreach($catalogues as $catalogue): $id=$catalogue["id"]; ?>
                             
+                                <tr>
+                                    <td class="cover"><a href="index.php?view=detail&id=<?=$id?>">  <img src=<?= $catalogue["cover"]?> alt="cover">   </a></td>
+                                    <td class="titre"><a href="index.php?view=detail&id=<?=$id?>">   <?= $catalogue["titre"] ?>  </a></td>
+                                    <td class="auteurs"><a href="index.php?view=detail&id=<?=$id?>">  <?= implode(" ",$catalogue["auteurs"]) ?> </a></td>
+                                    <td class="date_dedition"><a href="index.php?view=detail&id=<?=$id?>">  <?= $catalogue["date_edition"] ?>   </a></td>
+                                    <td class="rayon"> <a href="index.php?view=detail&id=<?=$id?>"> <?= $catalogue["rayon"] ?> </a></td>
+                                </tr>
                         <?php endforeach ?>
                 </tbody>
             </table>

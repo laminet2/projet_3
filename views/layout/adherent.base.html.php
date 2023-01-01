@@ -8,7 +8,7 @@
     
     <link rel="stylesheet" href="public/css/commun.css">
     <link rel="stylesheet" href="public/css/adherent.css">
-    <?php if($_GET["view"]=="catalogue_dispo"): ?>
+    <?php if($_GET["view"]=="catalogue_dispo"||$_GET["view"]=="detail"): ?>
     <link rel="stylesheet" href="public/css/adherent-catalogue_dispo.css">
     <?php else: ?>
     <link rel="stylesheet" href="public/css/adherent-pret.css">

@@ -212,7 +212,40 @@
             $ouvrages[$key]["rayon"]=$rayon["nom"];
         }
     }
-    
+    function filter(array $datas,string $filtre,string $value):array{
+        /* USE CASE */
+        $new_data=array();
+        if(is_array($datas[0][$filtre])){
+            foreach ($datas as $data) {
+                if(in_array($value,$data[$filtre])){
+                    $new_data[]=$data;
+                }
+            }
+        }
+        else{
+            foreach($datas as $data){
+                if($data[$filtre]==$value){
+                    $new_data[]=$data;
+                }
+            }
+        }
+        return $new_data;
+    }
+
+    function find_all_details_on_ouvrages(int $id):array{
+        $ouvrage=find_tuple_by_id("ouvrages",$id);
+        $ouvrage['auteurs']=auteurs_by_ouvrage($id);
+        $rayon=find_tuple_by_id("rayons",$ouvrage["rayon_id"]);
+        $ouvrage["rayon"]=$rayon["nom"];
+        if(isset($ouvrage["image_id"])){
+            $src=$ouvrage["image_id"];
+        }else{
+            $src="cover default";
+        }
+        $ouvrage["cover"]="public/image/cover"."/"."$src";
+        
+        return $ouvrage;
+    }
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
     //     $prets=[];

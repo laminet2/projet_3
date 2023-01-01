@@ -51,3 +51,6 @@ header.principal .user:hover{
 }
 
 /* button acceuil*/
+button:hover{
+    cursor: pointer;
+}

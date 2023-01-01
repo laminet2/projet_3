@@ -1,6 +1,6 @@
-main  {
-    /* */
-}
+/* main  {
+    
+} */
 
 main .proverbe{
     width: 70%;
@@ -34,9 +34,54 @@ main  section:nth-child(2) button{
     box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.25);
     border: solid 0px black;
 }
-main  section:nth-child(2) button.actif,main  section:nth-child(2) button:hover{
+main  section.button button.actif,main  section.button button:hover{
     color:  white;
     background-color: var(--primary-color);
+}
+main section.search {
+    margin: 2rem auto;
+    width: 70%;
+    padding: 1rem;
+    border: solid 1px var(--primary-color);
+
+}
+main section.search p{
+    text-align: center;
+    color: var(--primary-color);
+    text-decoration: underline;
+    
+}
+main section.search form{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin:2rem auto;
+    font-family: var(--second-typographie);
+}
+main section.search form input{
+    width: 15rem;
+}
+main section.search form select{
+    color: white;
+}
+main section.search form button{
+    background-color: white;
+    padding: 0.2rem;
+    border-radius: 30px;
+}
+main section.search form button:hover{
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+main section.search form input,main section.search form select{
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    border: solid 2px var(--primary-color);
+    height: 2rem;
+    color: white;
+
 }
 
 main section.catalogue table{
@@ -55,23 +100,75 @@ main section.catalogue table thead tr {
 main section.catalogue table thead tr th{
     padding: 0;
 }
-main  section.catalogue table .titre{
+main  section.catalogue table .titre ,main  section.catalogue table .titre a{
     width: 28%;
 }
-main  section.catalogue table .date_dedition{
+main  section.catalogue table .date_dedition,main  section.catalogue table .date_dedition a{
     width: 12%;
 }
-main section.catalogue table tbody td.cover img{
+main section.catalogue table tbody td.cover a img{
     height: 3rem;
 }
 main section.catalogue table tbody tr{
-    text-align: center;
-    font-family: var(--second-typographie);
+    
     border-color: var(--primary-color);
     border-style: solid;
     border-width: 0 0 2px 0;
 }
+main section.catalogue table tbody tr a{
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: small;
+    font-weight: lighter;
+
+}
 main section.catalogue table tbody tr td{
     padding: 1rem;
-    
+    text-align: center;
+}
+
+/* details */
+main.description .bottom{
+    display: flex;
+    width: 70%;
+    margin-left: 8rem;
+
+
+}
+main.description section.cover{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main.description section.cover img{
+    height: 70%;
+    margin-top: 1rem;
+}
+main.description section.description{
+    flex:3;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+main.description section.description .button{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+main.description section.description table{
+    text-align: left;
+}
+main.description section.description .button button{
+    background-color: var(--primary-color);
+    font-size: x-large;
+    margin-bottom: 2rem;
+}
+main.description section.description .button button.submit{
+    background-color: white;
+    width: 5rem;
+}
+main.description section.bottom section.description table,th{
+    padding: 1rem;
+    text-transform: capitalize;
 }
