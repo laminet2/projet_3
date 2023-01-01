@@ -10,10 +10,10 @@
         </section>
         <section class="button">
                 <button class="actif">
-                     OUVRAGE <br> DISPONIBLE
+                    <a href="index.php?view=catalogue_dispo">OUVRAGE <br> DISPONIBLE</a> 
                 </button>
                 <button>
-                    PRÊT
+                   <a href="index.php?view=demande_de_pret">PRÊT</a> 
                 </button>
         </section>
         <section class="search">
@@ -41,7 +41,7 @@
             </form>
         </section>
         <section class="catalogue">
-            <table >
+            <table class="style1">
                 <thead>
                     <tr>
                         <th class="cover">COVER</th>

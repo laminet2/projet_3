@@ -24,11 +24,13 @@
                     render_view('catalogue_dispo',$data,"adherent");
 
                     break;
+
                 case "detail":
                     $ouvrage=find_all_details_on_ouvrages($id);
                     $data["catalogue"]=$ouvrage;
                     render_view("detail",$data,"adherent");
                     break;
+
                 case "deconnexion":
                     session_destroy();
                     unset($_SESSION);
@@ -46,7 +48,7 @@
 
                         }
                         elseif($view=="demande_de_pret"){
-
+                            
                         }
                         else{
                             header("location:index.php?view=catalogue_dispo");
@@ -55,6 +57,15 @@
                 case 'RP':
                     break;
                 case 'RB':
+                        switch ($view) {
+                            case 'archiver_exemplaire':
+                                render_view("archiver_exemplaire",$data,"rb"); 
+                                break;
+                            
+                            default:
+                                # code...
+                                break;
+                        }
                     break;
                 default:
                     break;

@@ -15,13 +15,13 @@ main .proverbe h6{
     margin-top: 1rem;
     text-decoration: underline;
 }
-main  section:nth-child(2){
+main.catalogue_dispo  section:nth-child(2),main.description  section:nth-child(2){
     display: flex;
     justify-content: space-between;
     width: 40%;
     margin: 4rem auto 0 auto; 
 }
-main  section:nth-child(2) button{
+main.catalogue_dispo  section:nth-child(2) button,main.description  section:nth-child(2) button{
     width: 10rem;
     height: 3rem;
     border-radius: 15px;
@@ -29,53 +29,58 @@ main  section:nth-child(2) button{
     font-size: 0.9rem;
     font-size: small;
     font-family: var(--second-typographie);
-    color:  var(--primary-color);
     background-color: white;
     box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.25);
     border: solid 0px black;
 }
+main.catalogue_dispo  section:nth-child(2) button a,main.description  section:nth-child(2) button a{
+    color:  var(--primary-color);
+}
 main  section.button button.actif,main  section.button button:hover{
-    color:  white;
     background-color: var(--primary-color);
 }
-main section.search {
+main  section.button button.actif a,main  section.button button:hover a{
+    color:  white;
+
+}
+main.catalogue_dispo section.search {
     margin: 2rem auto;
     width: 70%;
     padding: 1rem;
     border: solid 1px var(--primary-color);
 
 }
-main section.search p{
+main.catalogue_dispo section.search p{
     text-align: center;
     color: var(--primary-color);
     text-decoration: underline;
     
 }
-main section.search form{
+main.catalogue_dispo section.search form{
     display: flex;
     justify-content: space-between;
     width: 70%;
     margin:2rem auto;
     font-family: var(--second-typographie);
 }
-main section.search form input{
+main.catalogue_dispo section.search form input{
     width: 15rem;
 }
-main section.search form select{
+main.catalogue_dispo section.search form select{
     color: white;
 }
-main section.search form button{
+main.catalogue_dispo section.search form button{
     background-color: white;
     padding: 0.2rem;
     border-radius: 30px;
 }
-main section.search form button:hover{
+main.catalogue_dispo section.search form button:hover{
     background-color: var(--primary-color);
     color: white;
     cursor: pointer;
 }
 
-main section.search form input,main section.search form select{
+main.catalogue_dispo section.search form input,main section.search form select{
     border-radius: 20px;
     background-color: var(--primary-color);
     border: solid 2px var(--primary-color);
@@ -83,49 +88,26 @@ main section.search form input,main section.search form select{
     color: white;
 
 }
+/* catalogue style 1 */
 
-main section.catalogue table{
-    empty-cells: show;
-    border-collapse: collapse; 
-    width: 85%;
-    margin: 2rem auto 0 auto;
-}
-
-main section.catalogue table thead tr {
-    background-color: var(--primary-color);
-    color: white;
-    height: 2rem;
-    font-size: small;
-}
-main section.catalogue table thead tr th{
-    padding: 0;
-}
-main  section.catalogue table .titre ,main  section.catalogue table .titre a{
+main  section table.style .titre a{
     width: 28%;
 }
-main  section.catalogue table .date_dedition,main  section.catalogue table .date_dedition a{
+main  section.catalogue table.style1 .date_dedition a{
     width: 12%;
 }
-main section.catalogue table tbody td.cover a img{
+main section.catalogue table.style1 tbody td.cover a img{
     height: 3rem;
 }
-main section.catalogue table tbody tr{
-    
-    border-color: var(--primary-color);
-    border-style: solid;
-    border-width: 0 0 2px 0;
-}
-main section.catalogue table tbody tr a{
+
+main section table.style1 tbody tr a{
     color: var(--primary-color);
     text-decoration: none;
     font-size: small;
     font-weight: lighter;
 
 }
-main section.catalogue table tbody tr td{
-    padding: 1rem;
-    text-align: center;
-}
+
 
 /* details */
 main.description .bottom{
@@ -163,6 +145,10 @@ main.description section.description .button button{
     background-color: var(--primary-color);
     font-size: x-large;
     margin-bottom: 2rem;
+}
+main.description section.description .button button a{
+    color: white;
+
 }
 main.description section.description .button button.submit{
     background-color: white;

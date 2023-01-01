@@ -1,5 +1,6 @@
 <?php 
     define("FILENAME","model/base_de_donne.json");
+    define("DURER_EMPRUNT_EN_JOUR",15);
     // function find_all_rayons($filename="base_de_donne.json"):array{
     //     $data=file_get_contents($filename);
     //     $data=json_decode($data,true);
