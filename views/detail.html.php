@@ -44,7 +44,7 @@
                     </table>
                     <div class="button">
                         <button ><a href="index.php?view=catalogue_dispo">Annuler</a></button>
-                        <button class="submit"><a href="index.php?btnsave=demande_de_pret&ouvrages=$id"></a><i class="fas fa-paper-plane"></i></button>
+                        <button class="submit"><a href="index.php?btnsave=demande_de_pret&ouvrages=<?= 5 ?>"></a><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </section>
         </section>

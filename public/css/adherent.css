@@ -15,13 +15,16 @@ main .proverbe h6{
     margin-top: 1rem;
     text-decoration: underline;
 }
-main.catalogue_dispo  section:nth-child(2),main.description  section:nth-child(2){
+
+
+/* Section Button */
+main  section.button,main.description  section.button{
     display: flex;
     justify-content: space-between;
     width: 40%;
     margin: 4rem auto 0 auto; 
 }
-main.catalogue_dispo  section:nth-child(2) button,main.description  section:nth-child(2) button{
+main  section.button button,main.description  section.button button{
     width: 10rem;
     height: 3rem;
     border-radius: 15px;
@@ -33,16 +36,21 @@ main.catalogue_dispo  section:nth-child(2) button,main.description  section:nth-
     box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.25);
     border: solid 0px black;
 }
-main.catalogue_dispo  section:nth-child(2) button a,main.description  section:nth-child(2) button a{
+main  section.button div a,main.description  section.button div a{
     color:  var(--primary-color);
 }
-main  section.button button.actif,main  section.button button:hover{
+main  section.button div.actif a button,main  section.button button:hover{
     background-color: var(--primary-color);
-}
-main  section.button button.actif a,main  section.button button:hover a{
     color:  white;
 
 }
+main  section.button div.actif a button{
+    color: white;
+    background-color: var(--primary-color);
+}
+
+
+/* SEARCH */
 main.catalogue_dispo section.search {
     margin: 2rem auto;
     width: 70%;

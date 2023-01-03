@@ -20,13 +20,13 @@
                     }
                     
                     $data["catalogues"]=$catalogues;
-
+                
                     render_view('catalogue_dispo',$data,"adherent");
 
                     break;
 
                 case "detail":
-                    $ouvrage=find_all_details_on_ouvrages($id);
+                    $ouvrage=find_all_details_on_ouvrage($id);
                     $data["catalogue"]=$ouvrage;
                     render_view("detail",$data,"adherent");
                     break;
@@ -45,10 +45,20 @@
             switch ($_SESSION["user"]["role"]) {
                 case 'adherent':
                         if($view=='emprunt'){
-
+                            $emprunts=emprunt_of_someone($_SESSION["user"]["id"]);
+                            if(isset($value)){
+                                $emprunts=filter_emprunt_of_someone_by_retourner_or_en_cours($emprunts,$value);
+                            }
+                            $data["emprunts"]=$emprunts;
+                            render_view("emprunt",$data,"adherent");
                         }
                         elseif($view=="demande_de_pret"){
-                            
+                            $demandes=demande_de_pret_of_someone($_SESSION["user"]["id"]);
+                            if(isset($filtre) && !empty($value)){
+                                $demandes=filter($demandes,$filtre,$value);
+                            }
+                            $data["demandes"]=$demandes;
+                            render_view("demande_de_pret",$data,"adherent");
                         }
                         else{
                             header("location:index.php?view=catalogue_dispo");
@@ -59,6 +69,7 @@
                 case 'RB':
                         switch ($view) {
                             case 'archiver_exemplaire':
+                                $data["exemplaires"]=find_all_exemplaire_perdu_or_deteriorer();
                                 render_view("archiver_exemplaire",$data,"rb"); 
                                 break;
                             
@@ -91,7 +102,8 @@
                                     header("location:index.php?view=catalogue_dispo");
                                     break;
                                 case "RB":
-                                    // header("location:index.php?view=oeuvre_dispo")
+                                    //header("location:index.php?view=oeuvre_dispo");
+                                    header("location:index.php?view=archiver_exemplaire");
                                 default:
                                     # code...
                                     break;
@@ -108,7 +120,22 @@
                     // render_view('catalogue_dispo',$data,"adherent");
                     // die;
                     header("location:index.php?view=catalogue_dispo&filtre=$filtre&value=$value");
+                    break;
+            case 'filter_demande_de_pret':
+                    extract($_POST);
+                    header("location:index.php?view=demande_de_pret&filtre=statut&value=$value");
+                    break;
             
+            case 'filter_emprunt_etat':
+                    extract($_POST);
+                    header("location:index.php?view=emprunt&value=$value");
+                    break;
+            case "archiver":
+
+                    archiver_exemplaire($_GET['id']);
+                    header("location:index.php?view=archiver_exemplaire");
+                    break;
+
             default:
                 # code...
                 break;
@@ -133,7 +160,12 @@
                     }
                         
                     require_once("views/layout/header.html.php");
+                    if($_SESSION["user"]["role"]=="RB"){
+                        require_once("views/layout/header_rb.html.php");
+                    }
                 }
+                
+
                 
                 require_once("views/$view.html.php");
             $ContentView=ob_get_clean();

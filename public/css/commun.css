@@ -1,5 +1,6 @@
 :root{
     --primary-color:#311005;
+    --second-color:rgba(94, 68, 60, 1);
     --text-typographie:'PT Serif', serif;
     --second-typographie:'lato', serif;
     --blue:rgba(10, 184, 195, 1);
@@ -54,3 +55,22 @@ header.principal .user:hover{
 button:hover{
     cursor: pointer;
 }
+.search2{
+    margin-left: 4rem;
+    font-family: var(--second-typographie);
+    width: 35%;
+    justify-content: space-between;
+    height: 2.2rem;
+    display: flex;
+}
+.search2 select,.search2 button{
+    padding:0.5rem;
+    background-color: white;
+    border-radius: 12px;
+    border: solid 2px var(--primary-color);
+}
+.search2 button:hover{
+    background-color: var(--primary-color);
+    color: white;
+}
+

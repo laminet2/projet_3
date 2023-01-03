@@ -66,11 +66,11 @@
 
     function archiver_exemplaire(int $id,$filename=FILENAME):void{
          /*usecase*/
-        $tuple=find_tuple_by_id("exemplaire",$id);
+        $tuple=find_tuple_by_id("exemplaires",$id);
         $data=file_get_contents($filename);
         $data=json_decode($data,true);
-        add("archive",$tuple);
-        supprimer("exemplaire",$id);
+        add("archives",$tuple);
+        supprimer("exemplaires",$id);
 
     }
     function find_user_by_login_and_password($login,$password,$filename=FILENAME):array|null{
@@ -85,17 +85,27 @@
     }
 
     /*          PARTIE CATALOGUE_DISPO               */
-
     function find_all_emprunt():array{
-        /*usecase*/
         $demandes=find_all("demande_de_pret");
         $emprunts=[];
         foreach($demandes as $demande){
-            if(  isset($demande["date_r_prevue"]) && !isset($demande["date_r_reel"])  ){
+            if(  isset($demande["date_r_prevue"])){
                 $emprunts[]=$demande;
             }
         }
         return $emprunts;
+    }
+
+    function find_all_emprunt_en_cours():array{
+        /*usecase*/
+        $emprunts=find_all_emprunt();
+        $empruntsEnCours=[];
+        foreach($emprunts as $emprunt){
+            if( !isset($emprunt["date_r_reel"])  ){
+                $empruntsEnCours[]=$emprunt;
+            }
+        }
+        return $empruntsEnCours;
     }
     function find_all_exemplaire_perdu_or_deteriorer():array{
         $exemplaires=find_all("exemplaires");
@@ -121,7 +131,7 @@
     }
 
     function verifier_exemplaire_in_emprunt($id):bool{
-        $emprunts=find_all_emprunt();
+        $emprunts=find_all_emprunt_en_cours();
         foreach($emprunts as $emprunt){
             if($emprunt["id"]==$id){
                 return True;
@@ -150,7 +160,7 @@
         //n'est pas dans la table emprunts (un emprunt est une demande de pret avec une date de retour prévu & sans date de retour_reel);
         // - verifier si ils sont deterioré ou perdu
         $OuvrageExemplaires=find_all_exemplaire_by_ouvrage($id);
-        //$emprunts=find_all_emprunt();
+        //$emprunts=find_all_emprunt_en_cours();
         
         //verifier si l'exemplaire est dispo 
         //$exemplaire_indispo=find_all_exemplaire_perdu_or_deteriorer();
@@ -233,7 +243,7 @@
         return $new_data;
     }
 
-    function find_all_details_on_ouvrages(int $id):array{
+    function find_all_details_on_ouvrage(int $id):array{
         $ouvrage=find_tuple_by_id("ouvrages",$id);
         $ouvrage['auteurs']=auteurs_by_ouvrage($id);
         $rayon=find_tuple_by_id("rayons",$ouvrage["rayon_id"]);
@@ -247,6 +257,75 @@
         
         return $ouvrage;
     }
+
+    /* PARTIE PRÊT */
+
+        function demande_de_pret():array{
+            /* USECASE*/
+            //rechercher les demandes de prêt sans date d'emprunt
+            $demandes=find_all("demande_de_pret");
+            $demande_de_pret=[];
+            foreach ($demandes as $key => $demande) {
+                if(!isset($demande["date_emprunt"])){
+                    
+                    $demande_de_pret[]=$demande;
+                }
+            }
+            return $demande_de_pret;
+        }
+
+        function demande_de_pret_of_someone(int $id):array{
+            /* USECASE */
+            $demande_de_pret=demande_de_pret();
+            $DPOS=[];
+            foreach ($demande_de_pret as $value) {
+                if($value["adherent_id"]==$id){
+                    if(!isset($value["statut"])){
+                        $value["statut"]="EN ATTENTE";
+                    }
+                    $value["ouvrage"]=find_all_details_on_ouvrage($value["ouvrage_id"]);
+                    $DPOS[]=$value;
+                }
+            }
+            return $DPOS;
+        }
+
+        function emprunt_of_someone(int $id):array{
+            /* USECASE */
+            $emprunts=find_all_emprunt();
+            $EOS=array();
+            foreach ($emprunts as $emprunt) {
+                if($emprunt["adherent_id"]==$id){
+
+                    if(!isset($emprunt["date_r_reel"])){
+                        $emprunt["date_r_reel"]= " - " ;
+                    }
+                    $emprunt["ouvrage"]=find_all_details_on_ouvrage($emprunt["ouvrage_id"]);
+                  
+                    $EOS[]=$emprunt;
+                }
+                
+            }
+            return $EOS;
+        }
+        function filter_emprunt_of_someone_by_retourner_or_en_cours(array $emprunts, string $value):array{
+            $new_array=array();
+            if($value=="en cours"){
+                foreach ($emprunts as $emprunt) {
+                    if(!isset($emprunt["date_r_reel"])){
+                        $new_array[]=$value;
+                    }
+                }
+            }elseif($value=="retourner"){
+                foreach ($emprunts as $emprunt) {
+                    if(isset($emprunt["date_r_reel"])){
+                        $new_array[]=$value;
+                    }
+                }
+            }
+            return $new_array;
+        }
+
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
     //     $prets=[];
@@ -263,7 +342,7 @@
     //     }
     //     return $prets;
     // }
-    // function find_all_emprunt():array{
+    // function find_all_emprunt_en_cours():array{
     //       $emprunts=[["id"=>1,"date_pret"=>"25/11/2022","date_r_prevue"=>"9/12/2022","adherent_id"=>5],
      //               ["id"=>2,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","adherent_id"=>2],
     //              ["id"=>3,"date_pret"=>"20/11/2022","date_r_prevue"=>"4/12/2022","date_r_reel"=>"4/12/2022","adherent_id"=>6]

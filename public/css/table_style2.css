@@ -3,4 +3,39 @@ main table.style2{
     border-collapse: collapse;
     width: 85%;
     margin: 2rem auto 0 auto;
+    color: white;
+    text-align: center;
+
+}
+main table.style2 thead,main table.style2 tbody form button{
+    background-color: var(--primary-color);
+    font-family: var(--text-typographie);
+    height: 2rem;
+    color: white;
+    
+}
+main table.style2 tbody{
+    background-color: var(--second-color);
+    font-family: var(--second-typographie);
+}
+main table.style2 tbody tr{
+    height: 2.2rem;
+}
+main table.style2 .cell1{
+    width: 21%;
+}
+main table.style2 .cell2{
+    width: 25%;
+}
+main table.style2 .cell3{
+    width: 26%;
+}
+main table.style2 tbody form button{
+    border: solid 0px ;
+    border-radius: 10px;
+    width: 50%;
+}
+main table.style2 tbody form button:hover{
+    background-color: white;
+    color:var(--primary-color);
 }

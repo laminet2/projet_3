@@ -9,12 +9,21 @@
             </h6>
         </section>
         <section class="button">
-                <button class="actif">
-                    <a href="index.php?view=catalogue_dispo">OUVRAGE <br> DISPONIBLE</a> 
-                </button>
-                <button>
-                   <a href="index.php?view=demande_de_pret">PRÊT</a> 
-                </button>
+                <div class="actif">
+                    <a href="index.php?view=catalogue_dispo">
+                        <button>
+                            OUVRAGE <br> DISPONIBLE 
+                        </button>
+                    </a>
+                </div>
+                <div>
+                    <a href="index.php?view=demande_de_pret">
+                        <button>
+                            PRÊT
+                        </button>
+                    </a>
+                </div>
+                
         </section>
         <section class="search">
                 <p>
@@ -45,10 +54,10 @@
                 <thead>
                     <tr>
                         <th class="cover">COVER</th>
-                        <th class="titre">TITRE</th>
+                        <th class="cell1">TITRE</th>
                         <th class="auteurs">AUTEURS</th>
-                        <th class="date_dedition">DATE D'EDITION</th>
-                        <th class="rayon">RAYON</th>
+                        <th class="cell3">DATE D'EDITION</th>
+                        <th class="cell4">RAYON</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,10 +65,10 @@
                             
                                 <tr>
                                     <td class="cover"><a href="index.php?view=detail&id=<?=$id?>">  <img src=<?= $catalogue["cover"]?> alt="cover">   </a></td>
-                                    <td class="titre"><a href="index.php?view=detail&id=<?=$id?>">   <?= $catalogue["titre"] ?>  </a></td>
-                                    <td class="auteurs"><a href="index.php?view=detail&id=<?=$id?>">  <?= implode(" ",$catalogue["auteurs"]) ?> </a></td>
-                                    <td class="date_dedition"><a href="index.php?view=detail&id=<?=$id?>">  <?= $catalogue["date_edition"] ?>   </a></td>
-                                    <td class="rayon"> <a href="index.php?view=detail&id=<?=$id?>"> <?= $catalogue["rayon"] ?> </a></td>
+                                    <td class="cell1"><a href="index.php?view=detail&id=<?=$id?>">  <?= $catalogue["titre"] ?>  </a></td>
+                                    <td class="cell2"><a href="index.php?view=detail&id=<?=$id?>">  <?= implode(" ",$catalogue["auteurs"]) ?> </a></td>
+                                    <td class="cell3"><a href="index.php?view=detail&id=<?=$id?>">  <?= $catalogue["date_edition"] ?>   </a></td>
+                                    <td class="cell4"><a href="index.php?view=detail&id=<?=$id?>">  <?= $catalogue["rayon"] ?> </a></td>
                                 </tr>
                         <?php endforeach ?>
                 </tbody>

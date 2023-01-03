@@ -12,9 +12,6 @@
             - fichier PHP : qui contient des functions et qui enregistre les modifications dans le fichier json 
             - fichier json : qui constitura ma base de donnée
 
-    
-
-
 
 /*  COMPREHENSION  MODEL */
 OUVRRAGES
@@ -30,7 +27,7 @@ DEMANDE DE PRET
 //A defaut de ne pas creer une  table emprunt qui ne contient que des redondances de la table demande_de_prêt, on utilisera la table demande_de_prêt qui passe au statut emprunt sous certaines condition
 //une demande de prêt termine son execution et devient  un emprunt si elle a un clé,valeur: statut,accepeter et a une clé date_d'emprunt;
 //c'est a dire que si l'on veut plus d'informations sur l'etat de  l'emprunt ( "en cours ou retourner ") on cherche une demande de prêt avec un attribut statut="acceper" and l'existence de l'attribut date_emprunt;
-//un exemplaire est actuellement en état de prêt que si la table emprunt associé a cette exemplaire n'a pas de  clé date_r_reel
+//un exemplaire est actuellement en état de prêt que si la table emprunt associé a cette exemplaire n'a pas de clé date_r_reel
 
 
 EMPRUNT

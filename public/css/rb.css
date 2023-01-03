@@ -1,0 +1,7 @@
+header.principal{
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url("https://s3-alpha-sig.figma.com/img/bffd/222e/20f47b596b13ca5bbb596fb2ac279958?Expires=1673222400&Signature=O6dFCSYJB468YJzZNbnOGaU9P~bnTEKSkKforfLPIhljcq1qzuNHcCmzVAsKMTdsRMj0xBtcoYi0TxXoRS11hmk7HyKasLHiNIJx7u8fGz78AtosqNt9~ZRLOtp~mIBj~6Hj-wPcZEJuM5clmASdXdvzSbMwdFHJQBN4IU23MgT~JlRcftIjv7cefvs00F4mSAHkyXfk5DSu5-NV-3EnKOubqDTzVHSaP0OXNhI1NIYJ6q7KC4ZIWaMpovgDKoQaqmEkl3qEp6G6Z--60huef8gsVhfDkywaj1xD6NcivNEO3MREJnhShH4fYzcCtAgpmbPBWlhZPPqpJ2FL-CkN2Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
+    height: 40vh;
+    background-size: cover;
+    background-position: center; 
+
+}
