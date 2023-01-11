@@ -7,13 +7,18 @@
                 Norbert Zongo
             </h6>
         </section>
-        <section class="button">
-                <button class="actif">
-                    <a href="index.php?view=catalogue_dispo">OUVRAGE <br> DISPONIBLE</a> 
-                </button>
-                <button>
-                    <a href="index.php?view=demande_de_pret">PRÊT</a> 
-                </button>
+        <section class="button1">
+                <div class="actif">
+                    <a href="index.php?view=catalogue_dispo">
+                        <button class="actif">OUVRAGE <br> DISPONIBLE</button>
+                    </a> 
+                </div>
+                <div>
+                    <a href="index.php?view=demande_de_pret">
+                        <button>PRÊT</button>
+                    </a> 
+                </div>
+                
         </section>
         <section class="bottom">    
                 <section class="cover">
@@ -43,8 +48,8 @@
                             </tr>
                     </table>
                     <div class="button">
-                        <button ><a href="index.php?view=catalogue_dispo">Annuler</a></button>
-                        <button class="submit"><a href="index.php?btnsave=demande_de_pret&ouvrages=<?= 5 ?>"></a><i class="fas fa-paper-plane"></i></button>
+                        <a href="index.php?view=catalogue_dispo"><button >Annuler</button></a>
+                        <form action="index.php?"  method="post" ><input type="hidden" name="id" value=<?=$catalogue["id"]?>><a><button type="submit" name="btnsave" value="add_demande_de_pret"><i class="fas fa-paper-plane"></i></button></a></form>
                     </div>
                 </section>
         </section>

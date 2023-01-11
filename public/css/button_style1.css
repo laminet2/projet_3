@@ -1,0 +1,30 @@
+ section.button1{
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin: 4rem auto 0 auto; 
+}
+ section.button1 button{
+    width: 10rem;
+    height: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-size: small;
+    font-family: var(--second-typographie);
+    background-color: white;
+    box-shadow:  0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: solid 0px black;
+}
+ section.button1 div a{
+    color:  var(--primary-color);
+}
+ section.button1 div.actif a button, section.button1 button:hover{
+    background-color: var(--primary-color);
+    color:  white;
+
+}
+ section.button1 div.actif a button{
+    color: white;
+    background-color: var(--primary-color);
+}

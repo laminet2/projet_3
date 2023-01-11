@@ -14,7 +14,7 @@
                             <td class="cell1"></td>
                             <td class="cell2"><?=$exemplaire["id"]?></td>
                             <td class="cell3"><?=$exemplaire["date_enregistrement"]?></td>
-                            <td class="cell4"><form action="index.php?id=<?=$exemplaire["id"]?>" method="post"><button type="submit" name="btnsave" value="archiver">ARCHIVER</button></form></td>  
+                            <td class="cell4"><form action="index.php?" method="post"><input type="hidden" name="id" value="<?=$exemplaire["id"]?>"><button type="submit" name="btnsave" value="archiver">ARCHIVER</button></form></td>  
                         </tr>
                     <?php endforeach ?>
                 </tbody>

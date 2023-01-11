@@ -21,7 +21,7 @@
                         <input type="password" name="password" id="password" placeholder="PASSWORD" required>
                     </div>
                     <div class="submit">
-                        <button type="submit"  name="btnsave" value="creer_c"><p>VALIDER</p>  </button>
+                        <button type="submit"  name="btnsave" value="creer_compte"><p>VALIDER</p>  </button>
                     </div>
                     <p>
                         Deja un compte <a href="index.php?view=connexion" style="color:var(--blue); ">Connecter vous</a>

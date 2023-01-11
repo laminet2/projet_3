@@ -6,7 +6,6 @@
             "id": 1,
             "nom": "Traore",
             "prenom": "Kamiya",
-            "naissance": "2002-09-12",
             "role": "adherent"
         },
         {
@@ -15,7 +14,6 @@
             "id": 2,
             "nom": "Sissoko",
             "prenom": "Saba",
-            "naissance": "2003-08-14",
             "role": "adherent"
         },
         {
@@ -24,7 +22,6 @@
             "id": 3,
             "nom": "Hamit",
             "prenom": "Ahmat",
-            "naissance": "2002-09-23",
             "role": "adherent"
         },
         {
@@ -33,7 +30,6 @@
             "id": 4,
             "nom": "Keita",
             "prenom": "Hawa",
-            "naissance": "2004-09-20",
             "role": "adherent"
         },
         {
@@ -42,7 +38,6 @@
             "id": 5,
             "nom": "Ndeye",
             "prenom": "Binta",
-            "naissance": "2003-09-20",
             "role": "adherent"
         },
         {
@@ -51,7 +46,6 @@
             "id": 6,
             "nom": "Barkir\u00e9",
             "prenom": "Ramatoulaye",
-            "naissance": "2003-2-2",
             "role": "adherent"
         },
         {
@@ -60,7 +54,6 @@
             "id": 7,
             "nom": "RESPONSABLE",
             "prenom": "DE PR\u00caT",
-            "naissance": "2000-8-24",
             "role": "RP"
         },
         {
@@ -69,8 +62,15 @@
             "id": 8,
             "nom": "RESPONSABLE",
             "prenom": "BIBLIOTHEQUE",
-            "naissance": "2004-09-20",
             "role": "RB"
+        },
+        {
+            "login": "lamzi",
+            "password": "1234",
+            "id": 63,
+            "nom": "Ba",
+            "prenom": "Lamarana",
+            "role": "adherent"
         }
     ],
     "rayons": [
@@ -499,7 +499,7 @@
             "etat": "deteriore",
             "ouvrage_id": 10
         },
-        "20":{
+        "20": {
             "id": 11,
             "date_enregistrement": "2017-08-18",
             "etat": "perdu",
@@ -536,7 +536,7 @@
         {
             "id": 5,
             "adherent_id": 2,
-            "ouvrage_id":2,
+            "ouvrage_id": 2,
             "exemplaire_id": 5,
             "statut": "accepter",
             "date_emprunt": "2022-11-20",
@@ -545,12 +545,17 @@
         {
             "id": 6,
             "adherent_id": 6,
-            "ouvrage_id":4,
+            "ouvrage_id": 4,
             "exemplaire_id": 8,
             "statut": "accepter",
             "date_emprunt": "2022-11-20",
             "date_r_prevue": "2022-12-5",
             "date_r_reel": "2022-12-7"
+        },
+        {
+            "id": 63,
+            "adherent_id": 63,
+            "ouvrage_id": "1"
         }
     ],
     "archives": [

@@ -1,5 +1,5 @@
 <main class="demande_de_pret">
-    <section class="button">
+    <section class="button1">
         <div class="actif">
             <a href="index.php?view=demande_de_pret">
                 <button >

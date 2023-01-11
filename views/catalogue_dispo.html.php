@@ -8,7 +8,7 @@
                 Norbert Zongo
             </h6>
         </section>
-        <section class="button">
+        <section class="button1">
                 <div class="actif">
                     <a href="index.php?view=catalogue_dispo">
                         <button>

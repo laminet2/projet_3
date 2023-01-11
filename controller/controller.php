@@ -9,7 +9,6 @@
                     
                     break;
                 case "creer_compte":
-
                      render_view("creer_compte");
             
                     break;
@@ -29,6 +28,7 @@
                     $ouvrage=find_all_details_on_ouvrage($id);
                     $data["catalogue"]=$ouvrage;
                     render_view("detail",$data,"adherent");
+
                     break;
 
                 case "deconnexion":
@@ -65,6 +65,12 @@
                         }
                     break;
                 case 'RP':
+                            switch($view){
+                                case 'all_demande_de_pret':
+                                    render_view("all_demande_de_pret",[],"rp");
+                                    break;
+                            }
+
                     break;
                 case 'RB':
                         switch ($view) {
@@ -104,14 +110,35 @@
                                 case "RB":
                                     //header("location:index.php?view=oeuvre_dispo");
                                     header("location:index.php?view=archiver_exemplaire");
+                                    break;
+                                case "RP":
+                                    header("location:index.php?view=all_demande_de_pret");
+                                    break;
                                 default:
                                     # code...
                                     break;
                             }
                     }
                 break;
+            case 'creer_compte':
+                    if(verifier_login_deja_existent($login)){
+                        header("location:index.php?view=creer_compte");
+                    }else{
+                        $data=[
+                            "login"=>$login,
+                            "password"=> $password,
+                            "id"=> uniqid(),
+                            "nom"=> $nom,
+                            "prenom"=> $prenom,
+                            "role"=> "adherent"
+                        ];
+                        add("users",$data);
+                        $_SESSION["user"]=$data;
+                        header("location:index.php?view=catalogue_dispo");
+
+                    }
+                    break;
             case 'filter_catalogue_dispo':
-                    extract($_POST);
                     // $catalogues=find_all_catalogue_dispo();
                     // $catalogues=filter($catalogues,$filtre,$value);
                     // var_dump($catalogues);
@@ -122,20 +149,31 @@
                     header("location:index.php?view=catalogue_dispo&filtre=$filtre&value=$value");
                     break;
             case 'filter_demande_de_pret':
-                    extract($_POST);
                     header("location:index.php?view=demande_de_pret&filtre=statut&value=$value");
                     break;
             
             case 'filter_emprunt_etat':
-                    extract($_POST);
                     header("location:index.php?view=emprunt&value=$value");
                     break;
+            case 'add_demande_de_pret':
+                    if(!isset($_SESSION["user"])||verifier_demande_de_pret_idem_en_cours($id,$_SESSION["user"]["id"])==true){
+                        header("location:index.php?view=catalogue_dispo");
+                    }else{
+                        $data=[
+                                "id"=> (int) uniqid(),
+                                "adherent_id"=> $_SESSION["user"]["id"],
+                                "ouvrage_id"=> $id,
+                        ];
+                        add("demande_de_pret",$data);
+                        header("location:index.php?view=demande_de_pret");
+                    }
+                    break;
             case "archiver":
-
                     archiver_exemplaire($_GET['id']);
                     header("location:index.php?view=archiver_exemplaire");
                     break;
-
+            
+                
             default:
                 # code...
                 break;
@@ -154,20 +192,32 @@
             ob_start();
 
                 if($view!="connexion" && $view!="acceuil" && $view!="creer_compte"){
+                    
+                    //RENOMMAGE DE L'adresse  relatif de view etant donné qu'il sont regrouper dans des dossiers specifique
+                    // relatif au rôle de chaque acteur
                     if($view!="catalogue_dispo" & $view!="detail"){
+                        //les pages mentionne ci dessus n'ont pas besoin de renommage car il ne sont pas dans des groupes
+                        //mais ils ont besoin de header
                         $view=$_SESSION["user"]["role"]."/".$view;
+
                         
                     }
-                        
+                    //chargement de l'en-tete de connexion
                     require_once("views/layout/header.html.php");
-                    if($_SESSION["user"]["role"]=="RB"){
+
+
+                    //Chargement d'en-tete specifique aux differents acteurs mais qui reste commun a plusieurs de leur view
+                    if(isset($_SESSION['user']) && $_SESSION["user"]["role"]=="RB"){
                         require_once("views/layout/header_rb.html.php");
+                    }
+                    if(isset($_SESSION['user']) && $_SESSION["user"]["role"]=="RP"){
+                        var_dump($view);
+
+                        require_once("views/layout/header_rp.html.php");
                     }
                 }
                 
-
-                
-                require_once("views/$view.html.php");
+                    require_once("views/$view.html.php");
             $ContentView=ob_get_clean();
             require_once("views/layout/".$base.".base.html.php");
     }

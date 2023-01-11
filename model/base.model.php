@@ -73,6 +73,7 @@
         supprimer("exemplaires",$id);
 
     }
+    /*  CONNEXION ET CREATION DE COMPTE */ 
     function find_user_by_login_and_password($login,$password,$filename=FILENAME):array|null{
         $data=file_get_contents($filename);
         $data=json_decode($data,true);
@@ -82,6 +83,16 @@
             }
         }
         return null;
+    }
+    function verifier_login_deja_existent(string $login):bool{
+        $users=find_all("users");
+        foreach($users as $user){
+            if($user['login']==$login){
+                return TRUE;
+            }
+        }
+        return FALSE;
+
     }
 
     /*          PARTIE CATALOGUE_DISPO               */
@@ -326,6 +337,15 @@
             return $new_array;
         }
 
+        function verifier_demande_de_pret_idem_en_cours(int $ouvrage_id,int $adherent_id):bool{
+            $emprunts=demande_de_pret_of_someone($adherent_id);
+            foreach($emprunts as $emprunt){
+                if($emprunt["statut"]=="EN ATTENTE"){
+                    return true;
+                }
+            }
+            return False;
+        }
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
     //     $prets=[];
