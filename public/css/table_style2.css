@@ -30,7 +30,14 @@ main table.style2 .cell2{
 main table.style2 .cell3{
     width: 26%;
 }
-main table.style2 tbody form button{
+
+main table.style2 tbody form.enregistrer{
+    display: flex;
+    margin-left: 2rem;
+    justify-content: space-around;
+
+}
+main table.style2 tbody form  button{
     border: solid 0px ;
     border-radius: 10px;
     width: 50%;

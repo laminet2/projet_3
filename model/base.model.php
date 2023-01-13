@@ -346,6 +346,124 @@
             }
             return False;
         }
+        /* RESPONSABLE PRET*/
+
+        /* PARTIE DEMANDE DE PRET */
+        function formatage_demande(array &$demande):void{
+
+            $adherent=find_tuple_by_id("users",$demande["adherent_id"]);
+            $ouvrage=find_tuple_by_id("ouvrages",$demande["ouvrage_id"]);
+            $adherent_name=$adherent["nom"]." ".$adherent["prenom"];
+            $ouvrage_titre=$ouvrage["titre"];
+            $demande["ouvrage_titre"]=$ouvrage_titre;
+            $demande["adherent_name"]=$adherent_name;
+
+        }
+
+
+
+        function demande_de_pret_sans_statut():array{
+            /* usecase */
+            $demandes=demande_de_pret();
+            $demandes_sans_statut=array();
+            foreach ($demandes as $demande ){
+                if(!isset($demande["statut"])){
+
+                    formatage_demande($demande);                    
+                    $demandes_sans_statut[]=$demande;
+                }
+            }
+            return $demandes_sans_statut;
+        }
+
+        function add_statut_in_demande_de_pret(int $id,string $statut,$filename=FILENAME):void{
+            /* USECASE*/
+            $tuple_id=find_tuple_by_id("demande_de_pret",$id,1);
+            $data=file_get_contents($filename);
+            $data=json_decode($data,true);
+
+            $data["demande_de_pret"][$tuple_id]["statut"]=$statut;
+
+            $data=json_encode($data,JSON_PRETTY_PRINT);
+            file_put_contents($filename,$data);
+
+        }
+
+        function find_all_exemplaire_of_ouvrages_dispo(int $id):array{
+            $exemplaires=find_all_exemplaire_by_ouvrage($id);
+            $exemplaires_dispo=[];
+
+            foreach ($exemplaires as $exemplaire) {
+                if(verifier_exemplaire_dispo_by_id($exemplaire["id"])){
+                    $exemplaires_dispo[]=$exemplaire;
+                }
+            }
+
+            return $exemplaires_dispo;
+        }
+
+        function demande_de_pret_accepter_et_pas_enregistrer():array{
+            $demandes=find_all("demande_de_pret");
+            $DPDS=[];
+            foreach ($demandes as $demande) {
+                if(isset($demande["statut"]) &&($demande["statut"]=="accepter") && !isset($demande["date_emprunt"])){
+                    formatage_demande($demande);
+                    $demande["exemplaires"]=find_all_exemplaire_of_ouvrages_dispo($demande["ouvrage_id"]);
+                    $DPDS[]=$demande;
+                }
+            }
+            return $DPDS;
+        }
+        
+
+        
+
+        function enregistrer_demande(int $id,int $exemplaire_id,string $filename=FILENAME):void{
+
+            //usecase//
+
+            $date_emprunt= new DateTime();
+            $STRdateOriginal=$date_emprunt->format("Y-m-d");
+            $date_r_prevu=new Datetime($STRdateOriginal);
+            $date_r_prevu->modify("+".DURER_EMPRUNT_EN_JOUR." day");
+
+            $STRdateR=$date_r_prevu->format("Y-m-d");
+
+            $data=file_get_contents($filename);
+            $data=json_decode($data,true);
+
+            $tuple_id=find_tuple_by_id("demande_de_pret",$id,1);
+            
+            $data["demande_de_pret"][$tuple_id]["date_r_prevue"]=$STRdateR;
+            $data["demande_de_pret"][$tuple_id]["date_emprunt"]=$STRdateOriginal;
+            $data["demande_de_pret"][$tuple_id]["exemplaire_id"]=$exemplaire_id;
+
+            $data=json_encode($data,JSON_PRETTY_PRINT);
+            file_put_contents($filename,$data);
+
+        }
+
+        function pret_retardataire():array{
+            $demandes=find_all("demande_de_pret");
+            $pret_retardataire=[];
+
+            foreach ($demandes as $demande) {
+                if(isset($demande["date_emprunt"]) && !isset($demande["date_r_reel"])){
+                    $today= new DateTime();
+
+                    $date_r_prevue= $demande["date_r_prevue"];
+                    $date_r_prevue=new DateTime($date_r_prevue);
+
+                    if($today>$date_r_prevue){
+
+                        formatage_demande($demande);
+                        $pret_retardataire[]=$demande;
+                    }
+                }
+            }
+            return $pret_retardataire;
+        }
+
     // function pret_accepter():array{
     //     $demande_de_pret=find_all_demande_de_pret();
     //     $prets=[];

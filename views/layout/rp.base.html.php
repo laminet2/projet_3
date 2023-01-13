@@ -14,6 +14,18 @@
     <script src="https://kit.fontawesome.com/32fc1d3f07.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <?= $HeaderPrincipal ?>
+    <header class="secondaire">
+        <section class="button1">
+                <div <?php if ($view=="RP/all_demande_de_pret"){echo(" class= \"actif\" ");} ?> ><a href="index.php?view=all_demande_de_pret"  ><button>DEMANDE DE PRÊT</button></a></div>
+
+                <div <?php if ($view=="RP/enregistrer_demande_de_pret"){echo(" class= \"actif\" ");} ?>><a href="index.php?view=enregistrer_demande_de_pret"  ><button>ENREGISTRER DEMANDE DE PRÊT</button></a></div>
+
+
+                <div <?php if ($view=="RP/pret_retardataire"){echo(" class= \"actif\" ");} ?> ><a href="index.php?view=pret_retardataire" ><button>PRÊT RETARDATAIRE</button></a></div>
+
+        </section>
+    </header>
     <?= $ContentView ?>
 </body>
 </html>

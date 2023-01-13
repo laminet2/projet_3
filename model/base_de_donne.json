@@ -493,17 +493,17 @@
             "date_enregistrement": "2014-08-17",
             "ouvrage_id": 10
         },
-        "19": {
-            "id": 20,
-            "date_enregistrement": "2014-08-17",
-            "etat": "deteriore",
-            "ouvrage_id": 10
-        },
         "20": {
             "id": 11,
             "date_enregistrement": "2017-08-18",
             "etat": "perdu",
             "ouvrage_id": 6
+        },
+        "21": {
+            "id": 20,
+            "date_enregistrement": "2014-08-17",
+            "etat": "deteriore",
+            "ouvrage_id": 10
         }
     },
     "demande_de_pret": [
@@ -525,13 +525,13 @@
         {
             "id": 3,
             "adherent_id": 3,
-            "ouvrage_id": 2
+            "ouvrage_id": 2,
+            "statut": "accepter"
         },
         {
             "id": 4,
             "adherent_id": 4,
-            "ouvrage_id": 3,
-            "statut": "rejeter"
+            "ouvrage_id": 3
         },
         {
             "id": 5,

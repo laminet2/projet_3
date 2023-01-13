@@ -1,7 +1,36 @@
 header.principal{
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url("https://s3-alpha-sig.figma.com/img/bffd/222e/20f47b596b13ca5bbb596fb2ac279958?Expires=1673222400&Signature=O6dFCSYJB468YJzZNbnOGaU9P~bnTEKSkKforfLPIhljcq1qzuNHcCmzVAsKMTdsRMj0xBtcoYi0TxXoRS11hmk7HyKasLHiNIJx7u8fGz78AtosqNt9~ZRLOtp~mIBj~6Hj-wPcZEJuM5clmASdXdvzSbMwdFHJQBN4IU23MgT~JlRcftIjv7cefvs00F4mSAHkyXfk5DSu5-NV-3EnKOubqDTzVHSaP0OXNhI1NIYJ6q7KC4ZIWaMpovgDKoQaqmEkl3qEp6G6Z--60huef8gsVhfDkywaj1xD6NcivNEO3MREJnhShH4fYzcCtAgpmbPBWlhZPPqpJ2FL-CkN2Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
-    height: 40vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url("https://s3-alpha-sig.figma.com/img/dc7e/6829/ae8a6f458856d9c48f2d91a764ed8207?Expires=1674432000&Signature=IAj-JMsDuw1WewqjqcWESuveQXHDb--d9xoux2HtRaaLdncTdYjYf3Y2PviC~nFLDZRxfoUe-X3sLduUYy4723dVFljvGIin9nydSj0IMzz3oSaMhn89xbQB77otud9Wd1~QeNsNSXN1IaH1wsibUBpvPzmrdhL5W1tU0HzpJDSqWJmurVIZbbAYeo5dd59RFA9YtLYcSRupOcIDoa5jAMq1AyczNjPX3J7X0W41NczGgEYs0Dr8Xd3emWWFgU3SWXI22-Z5ESLN2vyKCummxsOJ~ONj5uqvYapDBS1P6lbrrnjWIUBfIguXg0kYn7Qsdb64pj~d6yYpLRLnYUYIog__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
     background-size: cover;
+    height: 40vh;
     background-position: center; 
 
+
+}
+header.secondaire table.lien{
+    text-align: left;
+    background-color: white;
+    border-spacing: 5px;
+    empty-cells: show;
+    width: 80%;
+    margin-left: 5rem;
+    margin-top: 5rem;
+    border-radius: 15px;
+    position: absolute;
+    padding-top: 2rem;
+    padding-left: 2rem;
+
+}
+
+header.secondaire table.lien td.cell1, table.lien td.cell2{
+    border-bottom: 1px solid black;
+    
+}
+header.secondaire table.lien td a{
+    color: black;
+}
+header.secondaire table.lien th,header.secondaire table.lien td.actif a,header.secondaire table.lien td a:hover{
+    color: var(--blue);
+}
+main {
+    margin-top: 70vh;
 }

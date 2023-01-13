@@ -1,7 +1,7 @@
 <header class="principal">
         <section>
             <div class="invisible">
-                    <p><a href="" class="header">
+                    <p><a href="index.php?view=catalogue_dispo" class="header">
                         <i class="fas fa-book-open"></i> &nbsp
                         PRÊT
                     </a></p>

@@ -20,6 +20,7 @@
     <script src="https://kit.fontawesome.com/32fc1d3f07.js" crossorigin="anonymous"></script>
 </head>
 <body class="adherent">
+        <?= $HeaderPrincipal ?>
         <?= $ContentView ?>
 </body>
 </html>

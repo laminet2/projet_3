@@ -67,8 +67,26 @@
                 case 'RP':
                             switch($view){
                                 case 'all_demande_de_pret':
-                                    render_view("all_demande_de_pret",[],"rp");
+                                    $demandes=demande_de_pret_sans_statut();
+                                    $data["demandes"]=$demandes;
+                                    render_view("all_demande_de_pret",$data,"rp");
                                     break;
+                                case 'enregistrer_demande_de_pret':
+                                     
+                                    $demandes=demande_de_pret_accepter_et_pas_enregistrer();
+
+
+                                    $data["demandes"]=$demandes;
+                                    render_view("enregistrer_demande_de_pret",$data,"rp");
+                                    break;
+                                case 'pret_retardataire':
+                                    $data["demandes"]=pret_retardataire();      
+                                    render_view("pret_retardataire",$data,"rp");
+                                    break;
+                                case 'valider_retour':
+                                    render_view("valider_retour",[],'rp');
+                                    break;
+
                             }
 
                     break;
@@ -138,6 +156,9 @@
 
                     }
                     break;
+            
+            //partie adherent 
+
             case 'filter_catalogue_dispo':
                     // $catalogues=find_all_catalogue_dispo();
                     // $catalogues=filter($catalogues,$filtre,$value);
@@ -168,11 +189,22 @@
                         header("location:index.php?view=demande_de_pret");
                     }
                     break;
+
+            //partie Rp
+            case 'accepter_refuser_demande_de_pret':
+                add_statut_in_demande_de_pret($demande_de_pret_id,$statut);
+                header("location:index.php?view=all_demande_de_pret");
+                break;
+            case "enregistrer_demande":
+
+                enregistrer_demande($demande_id,$exemplaire_id);
+                header("location:index.php?view=enregistrer_demande_de_pret");
+                break;
             case "archiver":
-                    archiver_exemplaire($_GET['id']);
+                    archiver_exemplaire($id);
                     header("location:index.php?view=archiver_exemplaire");
                     break;
-            
+
                 
             default:
                 # code...
@@ -188,37 +220,31 @@
             if(!empty($data)){
                 extract($data);
             }
+
+            //chargement de l'en-tete d'utilisateur
+            ob_start();
+                require_once("views/layout/header.html.php");
+            $HeaderPrincipal=ob_get_clean();
             
+
+            //chargement de la vue
             ob_start();
 
-                if($view!="connexion" && $view!="acceuil" && $view!="creer_compte"){
-                    
-                    //RENOMMAGE DE L'adresse  relatif de view etant donné qu'il sont regrouper dans des dossiers specifique
-                    // relatif au rôle de chaque acteur
-                    if($view!="catalogue_dispo" & $view!="detail"){
-                        //les pages mentionne ci dessus n'ont pas besoin de renommage car il ne sont pas dans des groupes
-                        //mais ils ont besoin de header
+                //RENOMMAGE DE L'adresse  relatif de view etant donné qu'il sont regrouper dans des dossiers specifique
+                // relatif au rôle de chaque acteur
+
+                //les pages mentionne en condition n'ont pas besoin de renommage car il ne sont pas dans des groupes
+                //mais ils ont besoin de header
+
+                if($view!="connexion" && $view!="acceuil" && $view!="creer_compte" && $view!="catalogue_dispo" && $view!="detail"){
+                        
                         $view=$_SESSION["user"]["role"]."/".$view;
 
-                        
-                    }
-                    //chargement de l'en-tete de connexion
-                    require_once("views/layout/header.html.php");
-
-
-                    //Chargement d'en-tete specifique aux differents acteurs mais qui reste commun a plusieurs de leur view
-                    if(isset($_SESSION['user']) && $_SESSION["user"]["role"]=="RB"){
-                        require_once("views/layout/header_rb.html.php");
-                    }
-                    if(isset($_SESSION['user']) && $_SESSION["user"]["role"]=="RP"){
-                        var_dump($view);
-
-                        require_once("views/layout/header_rp.html.php");
-                    }
                 }
                 
                     require_once("views/$view.html.php");
             $ContentView=ob_get_clean();
+
             require_once("views/layout/".$base.".base.html.php");
     }
 
