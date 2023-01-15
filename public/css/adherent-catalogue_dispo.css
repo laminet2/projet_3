@@ -1,6 +1,6 @@
 header.principal {
     height: 92vh; 
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("https://s3-alpha-sig.figma.com/img/fea7/8200/45543ad566fb953f341f4349478844dc?Expires=1674432000&Signature=aeGfW5a08cxXN0azKZOZMGiYiFeZSFQZj338phBeYlWtAZhGAXowC~PMq-nDUQyQblk1FTXs7SOAfZURL5nWjt~Rgg1EG~J4zy2Mk-bLkB3Yu4nHjXO4kMst7fX4y3TK5IOVjJIo~8FLGr3QgG59jlsj~iWpY4h-qp1eNBGjWO3oL1qCRcT9ipvpkhZm9JXiY0os14MXsV2tVUdOUbgOPOwMXNZxhwe50LdJWiU9qYslfPQFu7qIOypw3GF~QqLoki-UX2VumYj2O4h0ixRASkktknVI0U0I~LQgFmKZ-tIP0evAa5O~zq3cbRC3v7jZ3Y-3CVabGOwbCwMcuMhWLw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
     background-size: 100% 100%;
     background-position: center; 
 }

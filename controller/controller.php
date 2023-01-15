@@ -75,7 +75,6 @@
                                      
                                     $demandes=demande_de_pret_accepter_et_pas_enregistrer();
 
-
                                     $data["demandes"]=$demandes;
                                     render_view("enregistrer_demande_de_pret",$data,"rp");
                                     break;
@@ -247,4 +246,3 @@
 
             require_once("views/layout/".$base.".base.html.php");
     }
-
